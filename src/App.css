@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+.container{
+  margin: 20px;
+}
+.containerout{
+  display:flex ;
+  justify-content: center;
+}
+.profileContainer{
+  display: flex;
+  padding: 30px;
+}
+.containerforprofile{
+  display: flex;
+
+}
+.cardscontainer{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 110px;
+}
+.detailContainer{
+  width: 250px;
+}
+.img{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.inputfield{
+  margin: 5px;
+}
