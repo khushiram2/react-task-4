@@ -18,7 +18,7 @@ export const EditProfile = () => {
   useEffect(()=>{
 axios.get(`${Api}/user/${id}`)
 .then((res)=>setUser(res.data))
-  },[])
+  },[id])
 const {name,email,image}=user
   const hanlechange = (e) => {
     const editeduser = {
