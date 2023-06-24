@@ -20,7 +20,7 @@ export const EditUser = () => {
   useEffect(() => {
     axios.get(`${Api}/user/${id}`)
       .then((res) => setUser(res.data))
-  }, [])
+  }, [id])
   const { name, email, image } = user
 
 
