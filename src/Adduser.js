@@ -1,61 +1,60 @@
-import React from "react";
-import { useContext } from "react";
-import { Usercontext } from "./context/Usercontext";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "@mui/joy/Input";
 import Button from '@mui/joy/Button';
-
+import axios from "axios";
+import { Api } from "./globalApi";
 export const Adduser = () => {
-    const navigate=useNavigate()
-  const a = useContext(Usercontext);
-  const userList = a.userList;
-  const user = a.user;
-  const setuser = a.setUSer;
-  const setUSerList = a.setUSerList;
+  const navigate = useNavigate()
+const [user,setUser]=useState({
+  name:"",
+  email:"",
+  image:""
+})
+
+const {name,email,image}=user
+
   const hanlechange = (e) => {
     const newuser = {
-        ...user,
-        id:userList.length+1,
-
+      ...user,
+      [e.target.id]: e.target.value
     };
-
-    newuser[e.target.id] = e.target.value
-    setuser(newuser)
-
-
+    setUser(newuser)
   };
- 
+
 
   const handlesubmit = () => {
-   setUSerList([...userList,user])
-   setuser({})
-   navigate("/users")
+    axios.post(`${Api}/newuser`,{newuser:user})
+    navigate("/users")
   };
 
   return (
     <div>
       <Input
-      className="inputfield"
-      variant="outlined"
-       type="name" 
-       id="name" 
-       placeholder="NAME" 
-       onChange={hanlechange} 
-       />
+        className="inputfield"
+        variant="outlined"
+        value={name}
+        type="name"
+        id="name"
+        placeholder="NAME"
+        onChange={hanlechange}
+      />
       <Input
-      className="inputfield"
-       variant="outlined"
+        className="inputfield"
+        variant="outlined"
         type="email"
+        value={email}
         id="email"
         placeholder="Email"
         onChange={hanlechange}
       />
       <Input
-      className="inputfield"
-       variant="outlined"
+        className="inputfield"
+        variant="outlined"
         type="text"
-        id="src"
-        placeholder="Image url"
+        value={image}
+        id="image"
+        placeholder="Image URL"
         onChange={hanlechange}
       />
       <Button size="md" onClick={handlesubmit} >submit</Button>

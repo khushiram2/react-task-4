@@ -6,7 +6,6 @@ import { Adduser } from './Adduser';
 import { EditUser } from './EditUser';
 import { Profile } from './Profile';
 import { EditProfile } from './EditProfile';
-import { Userstate } from './context/Userstate';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/joy/Button';
@@ -14,7 +13,7 @@ function App() {
   const navigate=useNavigate()
   return (
  <div>
-  <Userstate>
+
   <AppBar position="static">
     <Toolbar>
 
@@ -33,7 +32,6 @@ function App() {
     <Route path='/profile/:id' element={<Profile/>} />
     <Route path='/edit-profile/:id' element={<EditProfile/>} />
    </Routes>
-   </Userstate>
    </div>
 
 

@@ -1,31 +1,35 @@
-import React from "react";
-import { useContext } from "react";
-import { Usercontext } from "./context/Usercontext";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Input from "@mui/joy/Input";
 import Button from '@mui/joy/Button';
+import axios from "axios";
+import { Api } from "./globalApi";
 
 export const EditProfile = () => {
   const navigate = useNavigate();
+  const [user,setUser]=useState({
+    name:"",
+    email:"",
+    image:""
+  })
   const { id } = useParams();
-  const a = useContext(Usercontext);
-  const userList = a.userList;
-  const usertobeedited = userList.filter((e) => e.id === +id);
 
-  const user = a.user;
-  const setuser = a.setUSer;
+
+  useEffect(()=>{
+axios.get(`${Api}/user/${id}`)
+.then((res)=>setUser(res.data))
+  },[])
+const {name,email,image}=user
   const hanlechange = (e) => {
     const editeduser = {
       ...user,
-      id: +id,
+      [e.target.id]: e.target.value
     };
-    editeduser[e.target.id] = e.target.value;
-    setuser(editeduser);
+    setUser(editeduser);
   };
   const handlesubmit = () => {
-    userList[userList.indexOf(usertobeedited[0])] = user;
-    setuser({});
-   return navigate("/users");
+axios.put(`${Api}/edituser/${id}`,{newuser:user})
+navigate("/users");
   };
 
   return (
@@ -34,6 +38,7 @@ export const EditProfile = () => {
         variant="outlined"
         className="inputfield"
         type="text"
+        value={name}
         id="name"
         placeholder="NAME"
         onChange={hanlechange}
@@ -43,6 +48,7 @@ export const EditProfile = () => {
         className="inputfield"
         type="text"
         id="email"
+        value={email}
         placeholder="Email"
         onChange={hanlechange}
       />
@@ -50,7 +56,8 @@ export const EditProfile = () => {
         variant="outlined"
         className="inputfield"
         type="text"
-        id="src"
+        id="image"
+        value={image}
         placeholder="Image url"
         onChange={hanlechange}
       />

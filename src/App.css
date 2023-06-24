@@ -46,9 +46,14 @@
 .profileContainer{
   display: flex;
   padding: 30px;
+
+
 }
 .containerforprofile{
+  padding: 40px;
   display: flex;
+  width: 500px;
+  height :300px
 
 }
 .cardscontainer{
