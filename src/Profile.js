@@ -12,7 +12,7 @@ export const Profile = () => {
     useEffect(()=>{
 axios.get(`${Api}/user/${id}`)
 .then((res)=>setUser(res.data))
-    },[])
+    },[id])
 
   return (
     <div className='containerout'>
